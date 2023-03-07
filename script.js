@@ -216,3 +216,34 @@ const whereAmI = function (lat, lng) {
     .catch(err => console.error(`${err.message}`));
 };
 whereAmI(52.508, 13.381);
+
+///  Build a simple promises
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log('LOTTERY DRAW IS HAPPENING');
+  setTimeout(() => {
+    if (Math.random() >= 0.5) {
+      resolve('YOU WIN LOTTERY');
+    } else {
+      reject(new Error('YOU LOST YOUR MONEY'));
+    }
+  }, 2000);
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+// Promisfiying settimeout
+
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+wait(2)
+  .then(() => {
+    console.log('I waited 2 seconds');
+    return wait(1);
+  })
+  .then(() => console.log('ı waited for 1 seconds'));
+
+Promise.resolve('abc').then(x => console.log(x));
+Promise.reject(new Error('PROBLEM')).catch(x => console.log(x));
