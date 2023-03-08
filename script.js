@@ -247,3 +247,6 @@ wait(2)
 
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject(new Error('PROBLEM')).catch(x => console.log(x));
+
+///CLONE TEST
+console.log('clone test');
