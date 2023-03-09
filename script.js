@@ -250,3 +250,6 @@ Promise.reject(new Error('PROBLEM')).catch(x => console.log(x));
 
 ///CLONE TEST
 console.log('clone test');
+
+/// CLone test 2
+console.log('clone test2');
