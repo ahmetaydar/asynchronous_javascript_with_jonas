@@ -247,3 +247,5 @@ wait(2)
 
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject(new Error('PROBLEM')).catch(x => console.log(x));
+
+console.log('new item github test macbook');
