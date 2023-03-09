@@ -248,4 +248,12 @@ wait(2)
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject(new Error('PROBLEM')).catch(x => console.log(x));
 
+<<<<<<< HEAD
 console.log('new item github test macbook');
+=======
+///CLONE TEST
+console.log('clone test');
+
+/// CLone test 2
+console.log('clone test2');
+>>>>>>> 57a95c180fc85cc66ab7b5c32d07f30be6221fe4
