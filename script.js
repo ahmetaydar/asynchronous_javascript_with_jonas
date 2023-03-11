@@ -370,3 +370,60 @@ console.log(1);
   }
   console.log(3);
 })();
+
+// Promise Combinatore all,race,allSettled,any
+// Promise.all tüm promiseleri döndürür ama bir tanesi bile hatalıysa kısa devre yapar
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://restcountries.com/v3.1/name/italy`),
+    getJSON(`https://restcountries.com/v3.1/name/turkey`),
+
+    getJSON(`https://restcountries.com/v3.1/name/canada`),
+  ]);
+  console.log(res[0]);
+})();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(() => {
+      reject(new Error('Request took too long!'));
+    }, sec * 100);
+  });
+};
+
+Promise.race([
+  getJSON(`https://restcountries.com/v3.1/name/canada`),
+  timeout(1),
+])
+  .then(res => console.log(res[0]))
+  .catch(err => console.error(err));
+
+// promise.allSettled
+//asla kısa devre yapmaz tüm promiselri döndürür.all dan farkı budur
+
+Promise.allSettled([
+  Promise.resolve('succes'),
+  Promise.reject('ERROR'),
+  Promise.resolve('succes'),
+  Promise.resolve('another succes'),
+]).then(res => console.log(res));
+
+Promise.all([
+  Promise.resolve('succes'),
+  Promise.reject('ERROR'),
+  Promise.resolve('succes'),
+  Promise.resolve('another succes'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+
+//Promise.any [ES2021]
+// ilk yerine getirilen promise i döndürür
+Promise.any([
+  Promise.resolve('succes1'),
+  Promise.reject('ERROR'),
+  Promise.resolve('succes2'),
+  Promise.resolve('another succes'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
